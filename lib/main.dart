@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './questionario.dart';
+import './formulario.dart';
 import './resultado.dart';
 void main() {
     runApp(PerguntaApp());
@@ -7,13 +7,13 @@ void main() {
 
 class _PerguntaAppState extends State<PerguntaApp> {
   
-  var _perguntaSelecionada = 0;
-  var _pontuacaoTotal = 0;
+  var _texto = '';
+  var _alcance = 0;
 
 
   final List<Map<String,Object>> _perguntas = [
       {
-        'texto' : 'Qual a sua cor favorita?',
+        'texto' : 'Alcance',
         'respostas' : 
         [
           {'texto': 'verde', 'pontuacao':1},
@@ -41,23 +41,21 @@ class _PerguntaAppState extends State<PerguntaApp> {
       }
     ];
 
-  void _responder(int pontuacao){    
+  void _enviarForm(){    
     setState(() {
-      _perguntaSelecionada++;      
-      _pontuacaoTotal += pontuacao;
+      _texto = '';
+     _alcance = 0;
     });    
     
+    print('Formulario Enviado');
   }
 
-  void _reiniciarQuestionario(){
-    setState(() {
-    _perguntaSelecionada = 0;      
-    _pontuacaoTotal = 0;
-    });
+  bool get _podeEnviar{
+    return true;
   }
 
-  bool get temPerguntaSelecionada{
-    return _perguntaSelecionada < _perguntas.length;
+  bool get carregando{
+    return false;
   }
 
   @override
@@ -66,14 +64,15 @@ class _PerguntaAppState extends State<PerguntaApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Perguntas'),
+          title: Text('Enviar Mensagem'),
         ),
-        body: temPerguntaSelecionada ? 
-        Questionario(
-          perguntaSelecionada : _perguntaSelecionada,
-          perguntas : _perguntas,
-          responder : _responder)
-        : Resultado(_pontuacaoTotal,_reiniciarQuestionario)
+        body: !carregando ? 
+        Formmulario(
+          texto : _texto,
+          alcance : _alcance,
+          permissaoEnviar: _podeEnviar,
+          funcEnviar : _enviarForm)
+        : null
       )
     );
   }
