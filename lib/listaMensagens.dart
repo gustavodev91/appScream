@@ -1,41 +1,31 @@
 import 'package:flutter/material.dart';
+import 'cardMessage.dart';
 
-class Resultado extends StatelessWidget {
-  final int pontuacao;
-  final Function reiniciarQuestionario;
+class ListaMensagens extends StatelessWidget {
 
-  Resultado(this.pontuacao, this.reiniciarQuestionario);
+  final List<Map<String,String>> _listaMensagens;  
 
-  String get fraseResultado {
-    if(pontuacao < 4){
-      return 'Parabéns';
-    }else if(pontuacao < 9){
-      return 'Quase lá';
-    }else {
-      return 'Tente de novo!!';
-    }
-  }
-  
-  @override
+
+  ListaMensagens(this._listaMensagens);
+
+   @override
   Widget build(BuildContext context) {
-    return 
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Center(
-          child: Text(
-            fraseResultado,
-            style: TextStyle(fontSize: 28),
-          ) 
-        ),
-        FlatButton(
-          child: Text(
-            'Reiniciar', 
-            style: TextStyle(fontSize: 18)), 
-          textColor: Colors.blue,
-          onPressed: reiniciarQuestionario
-          )
-      ],
-    );
+
+    return  Column(
+        children: <Widget>[
+          ..._listaMensagens.map((menssagem) {
+            return CardMenssagem(user : menssagem['user'], menssagem: menssagem['texto']);
+          })
+        ]);
+    
+    
+    // Column(
+    //       children: <Widget>[            
+    //         Questao(perguntas[perguntaSelecionada]['texto']),
+    //         ...respostas.map((resp) {
+    //           return Resposta(resp['texto'], () => responder(resp['pontuacao']));
+    //         }).toList()
+    //       ],
+    //     );
   }
 }

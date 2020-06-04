@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './formulario.dart';
 import './resultado.dart';
+import 'listaMensagens.dart';
 void main() {
     runApp(PerguntaApp());
 }
@@ -10,35 +11,19 @@ class _PerguntaAppState extends State<PerguntaApp> {
   var _texto = '';
   double _alcance = 2.0;
 
-
-  final List<Map<String,Object>> _perguntas = [
+  var a =  [
       {
-        'texto' : 'Alcance',
-        'respostas' : 
-        [
-          {'texto': 'verde', 'pontuacao':1},
-          {'texto': 'azul', 'pontuacao':2},
-          {'texto': 'amarelo', 'pontuacao':3},
-          {'texto': 'preto', 'pontuacao':4},
-          {'texto': 'branco', 'pontuacao':5}
-        ]
-      },      
-      {
-        'texto' : 'Qual o seu animal favorito?',
-        'respostas' : [
-          {'texto': 'cachorro', 'pontuacao':1}, 
-          {'texto':'gato' , 'pontuacao':2},
-          {'texto': 'coelho' , 'pontuacao':3}
-        ]
+        'user' : 'usuario 1',
+        'menssagem' : 'texto'
       },
       {
-        'texto' : 'Qual o seu instrutor favorito',
-        'respostas' : [
-          {'texto':'maria', 'pontuacao':1},
-          {'texto':'joao', 'pontuacao':2} ,
-          {'texto':'leo', 'pontuacao': 3}
-        ]
-      }
+        'user' : 'usuario 2',
+        'menssagem' : 'texto'
+      },
+      {
+        'user' : 'usuario 3',
+        'menssagem' : 'texto'
+      },        
     ];
 
   void _enviarForm(String texto, double valor){    
@@ -68,7 +53,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
   }
 
   bool get carregando{
-    return false;
+    return true;
   }
 
   @override
@@ -88,7 +73,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
           alteraAlcance : _alteraAlcance,
           atualizaText : _atualizaText
           )
-        : null
+        :  ListaMensagens(a),
       )
     );
   }
