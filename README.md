@@ -1,6 +1,7 @@
 # appScream
 
-A new Flutter project.
+Projeto de broadcast de menssagem para usuários presentes em um raio de ação.
+Broadcast message to users inside on deterministic range.
 
 ## Getting Started
 
